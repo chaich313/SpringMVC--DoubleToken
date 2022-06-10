@@ -1,0 +1,38 @@
+logging:
+    level:
+        com.itranlin.basic: debug
+    file:
+        name: ./logs/itranlin-basic-server.log
+server:
+    port: 8098
+
+spring:
+    mvc:
+        pathmatch:
+            matching-strategy: ANT_PATH_MATCHER
+    jackson:
+        default-property-inclusion: non_null
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password: chen.he321231
+        url: jdbc:mysql://itranlin.com:3306/basic?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
+    redis:
+        host: itranlin.com
+        port: 6379
+        password: chen.he321231
+        timeout: 10000
+        jedis:
+            pool:
+                # 连接池中的最大空闲连接
+                max-idle: 200
+                # 连接池中的最小空闲连接
+                min-idle: 0
+                # 连接池最大阻塞等待时间（使用负值表示没有限制）
+                max-wait: -1
+                # 连接池最大连接数（使用负值表示没有限制）
+                max-active: 200
+com:
+    itranlin:
+        basic-config:
+            basic-package: 'com.itranlin.basic'

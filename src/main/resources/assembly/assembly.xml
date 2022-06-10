@@ -1,0 +1,40 @@
+<assembly>
+    <id>package</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources/bin</directory>
+            <outputDirectory>${file.separator}bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/static</directory>
+            <outputDirectory>${file.separator}static</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/data</directory>
+            <outputDirectory>${file.separator}data</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/excel</directory>
+            <outputDirectory>${file.separator}excel</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>application*.yml</include>
+            </includes>
+            <outputDirectory>${file.separator}config</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <files>
+        <file>
+            <source>${project.build.directory}${file.separator}${build.finalName}.jar</source>
+            <outputDirectory>${file.separator}</outputDirectory>
+            <destName>${build.finalName}.jar</destName>
+        </file>
+    </files>
+</assembly>
