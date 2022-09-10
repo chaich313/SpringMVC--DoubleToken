@@ -1,8 +1,8 @@
 logging:
     level:
-        com.itranlin.basic: debug
+        com.itranlin.reimu: debug
     file:
-        name: ./logs/itranlin-basic-server.log
+        name: ./logs/reimu-server.log
 server:
     port: 8098
 
@@ -35,4 +35,11 @@ spring:
 com:
     itranlin:
         basic-config:
-            basic-package: 'com.itranlin.basic'
+            basic-package: 'com.itranlin.reimu'
+        tencent:
+            cos:
+                secret-id: 'AKIDPhppTt52oRvBD7tS7IH2d0FLEvPfiYDg'
+                secret-key: 'JOGuJ1Yt0tXxTondGhuviGahbIno7E7m'
+                region: 'ap-chengdu'
+                bucket-name: 'reimu-1252508163'
+

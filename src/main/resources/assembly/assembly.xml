@@ -22,6 +22,10 @@
             <outputDirectory>${file.separator}excel</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>target/classes/lib</directory>
+            <outputDirectory>${file.separator}lib</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>src/main/resources</directory>
             <includes>
                 <include>application*.yml</include>

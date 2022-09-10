@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.itranlin</groupId>
-    <artifactId>itranlin-basic-server</artifactId>
+    <artifactId>reimu-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>itranlin-basic-server</name>
-    <description>Demo project for Spring Boot</description>
+    <name>reimu-server</name>
+    <description>灵梦十月课程预览</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -50,19 +50,19 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
         <!-- mybatisPlus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.3.4</version>
+            <version>3.5.2</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.2</version>
+            <version>3.5.3</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity-engine-core -->
@@ -76,6 +76,17 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>5.6.101</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
         </dependency>
 
         <dependency>
@@ -94,7 +105,7 @@
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>3.18.2</version>
+            <version>4.0.0</version>
         </dependency>
 
         <dependency>
@@ -107,10 +118,15 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.13</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>4.4.0</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>itranlin-basic-server</finalName>
+        <finalName>reimu-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -146,7 +162,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.itranlin.basic.BootBasicApplication</mainClass>
+                            <mainClass>com.itranlin.reimu.BootBasicApplication</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
@@ -158,6 +174,7 @@
                         <exclude>bin/*</exclude>
                         <exclude>assembly/*</exclude>
                         <exclude>static/**</exclude>
+                        <exclude>lib/**</exclude>
                         <exclude>templates/**</exclude>
                         <exclude>application.yml</exclude>
                     </excludes>
