@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.itranlin</groupId>
-    <artifactId>reimu-server</artifactId>
+    <artifactId>sound-detection-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>reimu-server</name>
-    <description>灵梦十月课程预览</description>
+    <name>sound-detection</name>
+    <description>音谷</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -77,11 +77,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.qcloud</groupId>
-            <artifactId>cos_api</artifactId>
-            <version>5.6.101</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -118,25 +113,11 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.13</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <artifactId>weixin-java-mp</artifactId>
-            <version>4.4.0</version>
-        </dependency>
     </dependencies>
 
     <build>
-        <finalName>reimu-server</finalName>
+        <finalName>sound-detection-server</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

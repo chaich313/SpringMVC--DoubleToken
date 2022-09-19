@@ -40,7 +40,7 @@ CREATE TABLE `sys_user`
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_user`
-VALUES ('1', 'admin', 'b9d11b3be25f5a1a7dc8ca04cd310b28', NULL, NULL, NULL);
+VALUES ('1', 'admin', 'b9d11b3be25f5a1a7dc8ca04cd310b28', NULL, NULL, NULL, NULL);
 COMMIT;
 
 

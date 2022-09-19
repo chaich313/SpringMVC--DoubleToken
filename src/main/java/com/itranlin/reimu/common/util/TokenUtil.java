@@ -18,8 +18,14 @@ public class TokenUtil {
     /**
      * 过期时间一周
      */
-    private static final long EXPIRE_TIME = 7 * 12 * 3600 * 1000;
+    private static final long ACCESS_EXPIRE_TIME = 7 * 12 * 3600 * 1000;
+
+    private static final long REFRESH_EXPIRE_TIME =30 * 12 * 3600 * 1000;
     private static final String TOKEN_SECRET = "qcy999";
+
+    public static final String TOKEN_TYPE_REFRESH = "refresh";
+
+    public static final String TOKEN_TYPE_ACCESS = "access";
 
     /**
      * 生成签名，15分钟过期
@@ -27,39 +33,59 @@ public class TokenUtil {
      * @param user 用户信息
      * @return token
      */
-    public static String sign(BaseUser user) {
+    public static String accessToken (BaseUser user) {
         // 设置过期时间
-        Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+        Date date = new Date(System.currentTimeMillis() + ACCESS_EXPIRE_TIME);
         // 私钥和加密算法
         Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
         // 设置头部信息
         Map<String, Object> header = new HashMap<>(2);
         header.put("Type", "Jwt");
         header.put("alg", "HS256");
-        String token = JWT.create()
+        String accessToken = JWT.create()
                 .withHeader(header)
                 .withClaim("username", user.getUsername())
                 .withClaim("id", user.getId())
                 .withClaim("role", user.getType())
+                .withClaim("tokenType", TOKEN_TYPE_ACCESS)
                 .withExpiresAt(date)
                 .sign(algorithm);
-        RedisUtil.set(token, "Authorization", 60 * 60 * 24);
-        return token;
+        RedisUtil.set(accessToken, "Authorization", 60 * 60 * 24);
+        return accessToken;
+    }
+
+    public static String refreshToken(BaseUser user) {
+        // 设置过期时间
+        Date date = new Date(System.currentTimeMillis() + REFRESH_EXPIRE_TIME);
+        // 私钥和加密算法
+        Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
+        // 设置头部信息
+        Map<String, Object> header = new HashMap<>(2);
+        header.put("Type", "Jwt");
+        header.put("alg", "HS256");
+        String refreshToken = JWT.create()
+                .withHeader(header)
+                .withClaim("id", user.getId())
+                .withClaim("tokenType", TOKEN_TYPE_REFRESH)
+                .withExpiresAt(date)
+                .sign(algorithm);
+        RedisUtil.set(refreshToken, "Authorization", 60 * 60 * 24);
+        return refreshToken;
     }
 
     /**
      * 检验token是否正确
      *
-     * @param token token串
+     * @param accessToken token串
      * @return token是否通过
      */
-    public static boolean verify(String token) {
-        if (null == RedisUtil.get(token)) {
+    public static boolean verify(String accessToken) {
+        if (null == RedisUtil.get(accessToken)) {
             return false;
         }
         Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
         JWTVerifier verifier = JWT.require(algorithm).build();
-        verifier.verify(token);
+        verifier.verify(accessToken);
         return true;
     }
 }

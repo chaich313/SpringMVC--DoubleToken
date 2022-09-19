@@ -48,10 +48,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             throw new RequestException(StatusEnum.SIGN_IN_INPUT_FAIL);
         }
         UserVO userVO = new UserVO();
-        String token = TokenUtil.sign(user);
+        String accessToken = TokenUtil.accessToken(user) ;
+        String refreshToken = TokenUtil.refreshToken(user);
         BeanUtils.copyProperties(user, userVO);
         signInVO.setUserInfo(userVO);
-        signInVO.setAuthorization(token);
+        signInVO.setAccessToken(accessToken);
+        signInVO.setRefreshToken(refreshToken);
         return signInVO;
     }
 
@@ -60,10 +62,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SignInVO signInVO = new SignInVO();
         SysUser user = this.getById(BaseContextHandler.getId());
         UserVO userVO = new UserVO();
-        String token = TokenUtil.sign(user);
+        String accessToken = TokenUtil.accessToken(user);
+        String refreshToken = TokenUtil.refreshToken(user);
         BeanUtils.copyProperties(user, userVO);
         signInVO.setUserInfo(userVO);
-        signInVO.setAuthorization(token);
+        signInVO.setRefreshToken(refreshToken);
+        signInVO.setAccessToken(accessToken);
         return signInVO;
     }
 

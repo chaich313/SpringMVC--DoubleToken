@@ -3,7 +3,6 @@ package com.itranlin.reimu.admin.controller;
 import com.itranlin.reimu.admin.dto.account.MpLoginDTO;
 import com.itranlin.reimu.admin.dto.account.PwdDTO;
 import com.itranlin.reimu.admin.dto.account.SignDTO;
-import com.itranlin.reimu.admin.service.ISysCustomerService;
 import com.itranlin.reimu.admin.service.ISysUserService;
 import com.itranlin.reimu.admin.vo.account.SignInVO;
 import com.itranlin.reimu.common.bean.RequestResult;
@@ -30,20 +29,12 @@ public class AccountController {
     @Resource
     private ISysUserService userService;
 
-    @Resource
-    private ISysCustomerService customerService;
 
     @PostMapping(value = {"/sign-in"})
     @ApiOperation(value = "登录")
     public RequestResult<SignInVO> signIn(
             @RequestBody @Validated @ApiParam(value = "登录数据", required = true) SignDTO signDTO) {
         return RequestResult.e(StatusEnum.SIGN_IN_OK, userService.signIn(signDTO));
-    }
-
-    @PostMapping("mp-sign-in")
-    @ApiOperation(value = "登录")
-    public RequestResult<SignInVO> login(@RequestBody MpLoginDTO mpLogin) {
-        return RequestResult.e(customerService.login(mpLogin.getCode(), mpLogin.getState()));
     }
 
     @GetMapping(value = "/logout")

@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author itranlin
  */
 @Component
-public class TokenInterceptor implements AsyncHandlerInterceptor {
+public class AccessTokenInterceptor implements AsyncHandlerInterceptor {
 
     @Override
     public boolean preHandle(
@@ -41,11 +41,13 @@ public class TokenInterceptor implements AsyncHandlerInterceptor {
         if (token != null) {
             boolean result = TokenUtil.verify(token);
             if (result) {
-                BaseContextHandler.setUsername(JWT.decode(token).getClaim("username").asString());
-                BaseContextHandler.setId(JWT.decode(token).getClaim("id").asString());
-                BaseContextHandler.setRole(JWT.decode(token).getClaim("role").asString());
-                BaseContextHandler.setToken(JWT.decode(token).getToken());
-                return true;
+                if (JWT.decode(token).getClaim("tokenType").asString().equals(TokenUtil.TOKEN_TYPE_ACCESS)){
+                    BaseContextHandler.setUsername(JWT.decode(token).getClaim("username").asString());
+                    BaseContextHandler.setId(JWT.decode(token).getClaim("id").asString());
+                    BaseContextHandler.setRole(JWT.decode(token).getClaim("role").asString());
+                    BaseContextHandler.setToken(JWT.decode(token).getToken());
+                    return true;
+                }
             }
         }
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
